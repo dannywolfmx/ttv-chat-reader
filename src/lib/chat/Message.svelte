@@ -4,6 +4,7 @@
   import es from "javascript-time-ago/locale/es";
   import { formatMessage } from "./tmi";
   import { onDestroy, onMount } from "svelte";
+  import VideoPlayer from "../player/VideoPlayer.svelte";
 
   export let message: MessagePayload;
 
@@ -13,7 +14,7 @@
   const timeago = new TimeAgo("es");
 
   function getTimeAgo(datetime) {
-    let ago = timeago.format(datetime, 'round');
+    let ago = timeago.format(datetime, "round");
     const diff = Date.now() - datetime;
     if (diff > 5 * 60 * 1000) {
       ago = ago + " 💀";
@@ -50,6 +51,7 @@
   <p class="ago">
     <time datetime={iso}>{ago}</time>
   </p>
+  <VideoPlayer message={message.message} />
 </div>
 
 <style>
